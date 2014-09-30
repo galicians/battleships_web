@@ -1,0 +1,57 @@
+cucumber-sinatra init Battleships lib/battleships.rb --app
+
+creates files --> lib/batteships.rb--> class Battleships < Sinatra::Base
+
+features --> step_definitions --> web_steps.rb(delete)
+support --> env.rb
+support --> paths.rb(delete??)
+config.ru --> rack config file
+
+rack up --> localhost:9292
+
+deleting features/step_definitions/web_steps.rb and features/support/paths.rb --> misleading
+
+creating a file .feature in the features directory
+
+describe feature an first scenario(what i want,who am i, )
+
+
+given(some fact),when(trigger), then(action desired)
+
+cucumber --> given () do, when () do, then do
+
+create features/step_definitions/homepage_steps.rb (step definition file) (paste cucumber info)
+
+cucumber -- > ruby
+
+
+create the views files in views/
+set :views, Proc.new
+
+the root is inside of lib
+
+link(sign in) --> <a>sign in</a>
+
+When we need to send data to the server we need to use forms,
+<form action='/si
+
+when we posting we have a param coming with the name:
+<input type='text' name='name' placehoder='Who are you?'/>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
