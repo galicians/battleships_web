@@ -1,11 +1,11 @@
 Feature: Joining the game
-	In order to have some fun
+	In order to play
 	As a player
-	I want to join a game
+	I want to join another player
 
 	Scenario: Joining a game
 		Given I am on the homepage
 		When I follow "sign in"
-		And I fill in "name" with "Mihai"
+		And I fill in "name" with "Pablo"
 		And I click on "Play"
-		Then I should see "Your board Mihai"
+		Then I should see "Pablo, you are waiting for a second player"

@@ -39,13 +39,24 @@ when we posting we have a param coming with the name:
 <input type='text' name='name' placehoder='Who are you?'/>
 
 
+git to ignore the notes
+
+gem for debugging save_and_open_page
+launchy
+
+form action="/new_player" methods="post"
+ raise params.inspect
+ {"player_name" => "Hadi"}
+ @name = params[:player_name]}
 
 
 
+set :views
+enable:sessions
 
+raise session.inspect
 
-
-
+session[:me]
 
 
 

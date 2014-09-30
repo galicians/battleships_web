@@ -1,0 +1,10 @@
+<h1><%= session["player1"] %>, you are waiting for a second player</h1>
+
+<%= if session[:player2] %>
+<form action="/board_player_two">
+	<input type="submit" name="player2"
+    value="Player 2 Place your ships" />
+</form>
+<%else>
+ 	<h1><%= session["player1"] %>, you are waiting for a second player</h1>
+<% end %>
