@@ -1,10 +1,22 @@
-<h1><%= session["player1"] %>, you are waiting for a second player</h1>
+<head>
+<META HTTP-EQUIV="refresh" CONTENT="5">
+</head>
 
-<%= if session[:player2] %>
-<form action="/board_player_two">
-	<input type="submit" name="player2"
-    value="Player 2 Place your ships" />
-</form>
-<%else>
- 	<h1><%= session["player1"] %>, you are waiting for a second player</h1>
-<% end %>
+
+
+<% if session["player2"] %>
+
+<h1><%= session["player1"] %>, please place your ships</h1>
+<h1><%= session["player2"] %>, please place your ships</h1>
+
+	<form action="/board_player_two">
+		<input type="submit" name="player1"
+	    value="Player 1 Place your ships" />
+	</form>
+	<form action="/board_player_two">
+		<input type="submit" name="player2"
+	    value="Player 2 Place your ships" />
+	</form>
+<% else %>
+	<h1><%= session["player1"] %>, you are waiting for a second player</h1>
+<% end %>	

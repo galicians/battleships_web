@@ -25,16 +25,26 @@ class Battleships < Sinatra::Base
 	  	player_one.name = params['name']
 	  	game.add_player(player_one)
 	  	puts session.inspect
-	  	erb :waiting_list
+	  	redirect '/waiting_list'
 	else
 		player_two = Player.new 
 	  	session[:player2] = params['name']
 	  	player_two.name = params['name']
 	  	game.add_player(player_two)
 	  	puts session.inspect
-	  	erb :waiting_list
+	  	redirect to '/waiting_list'
 	 end
   	
+  end
+
+  get '/waiting_list' do
+
+    erb :waiting_list
+
+  end
+
+  get '/rules' do
+    erb :rules
   end
 
   get '/board_player_one' do

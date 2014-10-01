@@ -60,6 +60,91 @@ session[:me]
 
 
 
+<% if session["player2"] %>
+<h1>player 2</h1>
+
+
+<% else %><% end %>
+
+
+<header>
+</header>
+<main>
+	<header></header>
+</main>
+
+
+redirect '/new' if @items.empty?
+  erb :index
+end
+
+http://www.creativebloq.com/web-design/get-started-sinatra-9134565
+££##################################################
+<ul id="todo-list" class="unstyled">
+  <% @items.each do |item| %>
+  <li id="<%= item[:id] %>">
+  <span class="item">
+  <%= item[:done] ? "<del>#{item[:content]}</del>" : item[:content] %>
+  </span>
+  <span class="pull-right">
+  <a href="#" class="btn done"><%= item[:done] ? "Not done" : "Done"%></a>
+  <a href="/delete/<%= item[:id] %>" class="btn btn-danger">Delete</a>
+  </span>
+  </li>
+  <% end %>
+</ul>
+<a href="/new" class="btn btn-primary">Add todo item</a>
+££##################################################
+The reason that we have so little HTML in this view is because most of it is in the layout. Sinatra enables you to create a view called layout – followed by the extension of the template language being used – in this case, layout.erb. This file is then loaded for all views.
+
+   <h1><%= @title %></h1>
+      <%= yield %>
+
+      The layout must contain the yield variable, which is where the main view content is displayed.
+
+For Cucumber features the key words used here are Feature, Scenario, Given, When, Then, and And. 
+
+ The clauses ( steps ) that make up a Scenario each begin with one of: Given, When, Then, And 
+
+ They are the steps that Cucumber will report as passing, failing or pending based on the results of the corresponding step matchers in the step_definitions.rb files.
+
+Cucumber documentation:
+https://github.com/cucumber/cucumber/wiki/A-Table-Of-Content
+
+Short blog article on how write cukes for cucumber:
+how to write cukes for cucumber: http://www.elabs.se/blog/15-you-re-cuking-it-wrong
+
+Article on how to write stories:
+http://blog.josephwilk.net/ruby/telling-a-good-story-rspec-stories-from-the-trenches.html
+
+
+A feature can be conceptualized as an indivisible unit of functionality embedded in the project to which it belongs. 
+
+good step definition has the following attributes:
+
+The matcher is short.
+The matcher handles both positive and negative (true and false) conditions.
+The matcher has at most two value parameters
+The parameter variables are clearly named
+The body is less than ten lines of code
+The body does not call other steps
+My template for a step definition presently looks like this:
+
+
+When /statement identifier( not)? expectation "([^\"]+)"/i do |boolean, value|
+  actual = expectation( value )
+  expected = !boolean
+  message = "expectation failed for #{value}" 
+  assert( actual == expected, message )
+end
+
+
+
+
+
+
+
+
 
 
 
