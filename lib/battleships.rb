@@ -10,7 +10,12 @@ class Battleships < Sinatra::Base
  set :views, Proc.new { File.join(root, "..","views") }
  enable :sessions
   
- GAME = Game.new
+  GAME = Game.new
+  board = Board.new(Cell)
+
+  water = Water.new
+  board.grid.values.each {|cell| cell.content = water}
+  board.grid.values.each {|cell| puts cell.content.inspect }
 
 
   get '/' do
@@ -48,7 +53,7 @@ class Battleships < Sinatra::Base
   end
 
   get '/board_player_one' do
-
+    @board = board
   	erb :board_player_one
   end
 
