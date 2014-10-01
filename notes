@@ -139,13 +139,15 @@ When /statement identifier( not)? expectation "([^\"]+)"/i do |boolean, value|
 end
 
 
+how to test jekyll with cucumber: https://github.com/jekyll/jekyll/blob/master/features/step_definitions/jekyll_steps.rb
 
 
+reset css
 
 
+Design for hackers --> awesome book about CSS
 
-
-
+http://webtypography.net/
 
 
 

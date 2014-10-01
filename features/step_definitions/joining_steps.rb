@@ -1,17 +1,22 @@
 
-Given(/^I am on the homepage$/) do
-  pending # express the regexp above with the code you wish you had
+Given(/^I register to Battleships$/) do 
+	 visit '/'
+	 click_link('Sign in')
+	 fill_in('name', :with => 'name')
+	 click_button('Register')
 end
 
-When(/^I click on "(.*?)"$/) do |arg1|
-  pending # express the regexp above with the code you wish you had
+Then(/^I should see a waiting page$/) do
+	visit ('/waiting_list')
 end
 
-When(/^I fill in "(.*?)" with "(.*?)"$/) do |arg1, arg2|
-  pending # express the regexp above with the code you wish you had
+Given(/^there is a player waiting$/) do
+	first_player = Player.new	#why not @player1 = GAME.player1
 end
 
-Then(/^I should be placed on the "(.*?)"$/) do |arg1|
-  pending # express the regexp above with the code you wish you had
+Then(/^I should see the button  to "(.*?)"$/) do |button|
+	click_button('Player 2 Place your ships')
 end
+
+
 

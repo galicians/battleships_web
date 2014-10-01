@@ -3,9 +3,11 @@ Feature: Joining the game
 	As a player
 	I want to play against another player
 
-	Scenario: Joining a game
-		Given I am on the homepage
-		When I click on "sign in"
-		And I fill in "name" with "Pablo"
-		And I click on "Play"
-		Then I should be placed on the "waiting list"
+	Scenario: Joining a game as the first player
+		Given I register to Battleships
+		Then I should see a waiting page
+
+	Scenario: Joining when there is a player in the waiting list
+	Given there is a player waiting
+	When I register to Battleships
+	Then I should see the button  to "Place my ships"
