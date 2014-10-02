@@ -1,6 +1,20 @@
 
-<ul>
-<% @board.grid.values.each do |cell| %>
-	<li><%= cell.content.inspect %></li>
-<% end %>	
-</ul>
+<table>
+	<tr>
+		<% [*'A'..'J'].each do |letter|%>
+		<th><%= letter%></th>
+		<%end%>
+	</tr>
+	<% x = 0 %>
+	 <% @board.grid.values.each do |cell| %>
+	 	<% x += 1 %>
+	 	<td><%= cell.content.inspect %></td>
+	 	<% if x % 10 == 0 %>
+	 		<th><%=  x / 10  %><th>
+	 		</tr>
+	 	<% end %>
+	 		
+	 <% end %>	
+	
+	
+</table>
