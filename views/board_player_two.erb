@@ -1,1 +1,52 @@
-<h1><%= session["player2"] %>, Please place your ships</h1>
+<p>This is your board</p>
+
+<table>
+
+	<tr>
+		<th></th>
+		<% [*'A'..'J'].each do |letter|%>
+		<th><%= letter%></th>
+		<%end%>
+	<% x = 10 %>
+	 <% @board2.grid.values.each do |cell| %>
+	 	<%= "</tr><tr><th>#{x / 10}</th>" if x % 10 == 0 %>
+	 	<td><%= cell.content.class %></td>
+	 	<% x += 1 %>
+	 <% end %>	
+	
+	
+</table>
+
+<p>Please place your boats</p>
+
+<p>First the carrier, just select one cell from the board below:</p>
+
+<table>
+
+	<tr>
+		<th></th>
+		<% [*'A'..'J'].each do |letter|%>
+		<th><%= letter%></th>
+		<%end%>
+	<% x = 10 %>
+	<% coords = [] %>
+	<% [*'A'..'J'].each {|letter| [*1..10].each {|number| coords << "#{letter}#{number}" }} %>
+	<form action="/place_ships_player_two" method='post'>
+	 <% coords.each do |cell|%>
+	 	<%= "</tr><tr><th>#{x / 10}</th>" if x % 10 == 0 %>
+	 	<td>
+	 		<input type="radio" name="coord" value=<%= "#{cell}" %>>	
+	 	</td>
+	 	<% x += 1 %>
+	 <% end %>
+	  <input type="submit" name = "carrier" value="Place carrier">
+	 <input type="submit" name = "battleship" value="Place battleship">
+	 <input type="submit" name = "destroyer" value="Place destroyer">
+	 <input type="submit" name = "submarine" value="Place submarine">
+	 <input type="submit" name = "patrol_boat" value="Place patrol boat">
+	 </form>	
+
+	
+	
+</table>
+

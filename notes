@@ -1,3 +1,12 @@
+most commond errors:
+
+- forgetting the def in front of the method
+- extra }
+- forgueting the user of return when i want skip statements in a method return x if game.ready?
+- typho that goes over run, eg in initialize
+
+
+
 cucumber-sinatra init Battleships lib/battleships.rb --app
 
 creates files --> lib/batteships.rb--> class Battleships < Sinatra::Base
@@ -152,3 +161,52 @@ http://webtypography.net/
 <!-- <h1><%= 'Pablo' %>, Please place your ships</h1> -->
 
  <% @board.grid.values.each do |cell| %>
+
+
+
+<table>
+	<tr>
+		<% [*'A'..'J'].each do |letter|%>
+		<th><%= letter%></th>
+		<%end%>
+	</tr>
+	<% x = 0 %>
+	 <% @board.grid.values.each do |cell| %>
+	 	<% x += 1 %>
+	 	<td><%= cell.content.inspect %></td>
+	 	<% if x % 10 == 0 %>
+	 		<th><%=  x / 10  %><th>
+	 		</tr>
+	 	<% end %>
+	 		
+	 <% end %>	
+	
+	
+</table>
+
+
+<table>
+
+	<tr>
+		<th>*</th>
+		<% [*'A'..'J'].each do |letter|%>
+		<th><%= letter %></th>
+		<%end%>
+	<% x = 10 %>
+	 <% @board.grid.values.each do |cell| %>
+	 	<% if x % 10 == 0 %>
+	 		</tr>
+	 		<tr>
+	 		<th><%=  x / 10  %></th>
+	 	<% end %>
+	 	<td><%= cell.content.inspect %></td>
+	 	<% x += 1 %>
+	 <% end %>	
+	
+	
+</table>
+  erb :board_player_one if session.has_key?(player1)
+    erb :board_player_two if session.has_key?(player2)
+
+
+

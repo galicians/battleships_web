@@ -1,0 +1,72 @@
+
+<head>
+<META HTTP-EQUIV="refresh" CONTENT="10">
+</head>
+
+
+<p>fight!!!! player one sea</p>
+
+
+<p>Here you can see your opponent board</p>
+
+<table>
+
+	<tr>
+		<th></th>
+		<% [*'A'..'J'].each do |letter|%>
+		<th><%= letter%></th>
+		<%end%>
+	<% x = 10 %>
+	 <% @board2.grid.values.each do |cell| %>
+	 	<%= "</tr><tr><th>#{x / 10}</th>" if x % 10 == 0 %>
+	 	<td><%= cell.hit? %></td>
+	 	<% x += 1 %>
+	 <% end %>	
+	
+	
+</table>
+
+
+
+<% if GAME.turn == GAME.player1 %>
+<p>Please select a cell and shoot to your opponent boats</p>
+	<table>
+		<tr>
+			<th></th>
+			<% [*'A'..'J'].each do |letter|%>
+			<th><%= letter%></th>
+			<%end%>
+		<% x = 10 %>
+		<% coords = [] %>
+		<% [*'A'..'J'].each {|letter| [*1..10].each {|number| coords << "#{letter}#{number}" }} %>
+		<form action="/place_shoot_player_one" method='post'>
+		 <% coords.each do |cell|%>
+		 	<%= "</tr><tr><th>#{x / 10}</th>" if x % 10 == 0 %>
+		 	<td>
+		 		<input type="radio" name="coord" value=<%= "#{cell}" %>>	
+		 	</td>
+		 	<% x += 1 %>
+		 <% end %>
+		 <input type="submit" name = "shoot" value="Place shoot">
+		 </form>	
+	</table>
+<% end %>
+
+<p>Here, you can check your ships are and where your opponent has placed the shoots</p>
+
+<table>
+
+	<tr>
+		<th></th>
+		<% [*'A'..'J'].each do |letter|%>
+		<th><%= letter%></th>
+		<%end%>
+	<% x = 10 %>
+	 <% @board1.grid.values.each do |cell| %>
+	 	<%= "</tr><tr><th>#{x / 10}</th>" if x % 10 == 0 %>
+	 	<td><%= cell.hit? ? 'X': cell.content.class %></td>
+	 	<% x += 1 %>
+	 <% end %>	
+	
+	
+</table>
