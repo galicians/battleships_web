@@ -2,12 +2,23 @@
 <META HTTP-EQUIV="refresh" CONTENT="10">
 </head>
 
+<% 	miss = "<img src=\"/miss.jpg\" alt=\"S\" width=\"50\" height=\"50\"" 
+	 		water = "<img src=\"/water.jpg\" alt=\"W\" width=\"50\" height=\"50\""
+	 		ship = "<img src=\"/ship.jpg\" alt=\"S\" width=\"50\" height=\"50\"" 
+	 		fire = "<img src=\"/fire.jpg\" alt=\"S\" width=\"50\" height=\"50\"" %>
 
 
-<p>fight!!!! player two sea</p>
+<h2><%= session["player2"] %>, this is your operations center</h2>
 
 
-<p>Here you can see your opponent board</p>
+<h3>Here you can see your opponent board</h3>
+<style>
+ input.hidden{
+	 	<%= "visibility: hidden;"%>
+	 }
+</style>
+
+
 
 <table>
 
@@ -19,7 +30,7 @@
 	<% x = 10 %>
 	 <% @board1.grid.values.each do |cell| %>
 	 	<%= "</tr><tr><th>#{x / 10}</th>" if x % 10 == 0 %>
-	 	<td><%= cell.hit? %></td>
+	 	<td><%= cell.hit? ? cell.content.class == Ship ? fire : miss : cell.content.class == Ship ? water : water %></td>
 	 	<% x += 1 %>
 	 <% end %>	
 	
@@ -27,6 +38,7 @@
 </table>
 
 
+</style>	
 
 <% if GAME.turn == GAME.player2 %>
 <p>Please select a cell and shoot to your opponent boats</p>
@@ -42,8 +54,8 @@
 	<form action="/place_shoot_player_two" method='post'>
 	 <% coords.each do |cell|%>
 	 	<%= "</tr><tr><th>#{x / 10}</th>" if x % 10 == 0 %>
-	 	<td>
-	 		<input type="radio" name="coord" value=<%= "#{cell}" %>>	
+	 	<td width="50" height="50">
+	 		<input type="radio" name="coord" value=<%= "#{cell}" %> <%= "class=\"hidden\"" if @board1.grid[cell.to_sym].hit? %>>
 	 	</td>
 	 	<% x += 1 %>
 	 <% end %>
@@ -53,9 +65,11 @@
 <% end %>
 
 
-<p>Here, you can check your ships are and where your opponent has placed the shoots</p>
+<h3>Here, you can check your ships are and where your opponent has placed the shoots</h3>
 
 <table>
+
+	
 
 	<tr>
 		<th></th>
@@ -65,7 +79,8 @@
 	<% x = 10 %>
 	 <% @board2.grid.values.each do |cell| %>
 	 	<%= "</tr><tr><th>#{x / 10}</th>" if x % 10 == 0 %>
-	 	<td><%= cell.hit? ? 'X': cell.content.class %></td>
+
+	 	<td><%= cell.hit? ? cell.content.class == Ship ? fire : miss : cell.content.class == Ship ? ship : water %></td>
 	 	<% x += 1 %>
 	 <% end %>	
 	

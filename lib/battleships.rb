@@ -8,6 +8,7 @@ require_relative 'cell'
 
 class Battleships < Sinatra::Base
  set :views, Proc.new { File.join(root, "..","views") }
+ set :public_folder, 'public'
  enable :sessions
  #set :public folder for css
   
@@ -67,6 +68,7 @@ class Battleships < Sinatra::Base
     @board2 = board2
     @game = GAME
     return redirect '/place_shoot_player_one'if board1.ships_count == 5
+    # send_file 'water.jpg', :type => :jpg
     erb :board_player_one
   end
 

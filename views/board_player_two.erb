@@ -10,7 +10,7 @@
 	<% x = 10 %>
 	 <% @board2.grid.values.each do |cell| %>
 	 	<%= "</tr><tr><th>#{x / 10}</th>" if x % 10 == 0 %>
-	 	<td><%= cell.content.class %></td>
+	 	<td><%= cell.content.class == Ship ? "<img src=\"/ship.jpg\" alt=\"S\" width=\"50\" height=\"50\"" : "<img src=\"/water.jpg\" alt=\"W\" width=\"50\" height=\"50\"" %></td>
 	 	<% x += 1 %>
 	 <% end %>	
 	
@@ -33,9 +33,9 @@
 	<% [*'A'..'J'].each {|letter| [*1..10].each {|number| coords << "#{letter}#{number}" }} %>
 	<form action="/place_ships_player_two" method='post'>
 	 <% coords.each do |cell|%>
-	 	<%= "</tr><tr><th>#{x / 10}</th>" if x % 10 == 0 %>
-	 	<td>
-	 		<input type="radio" name="coord" value=<%= "#{cell}" %>>	
+	 	<%= "</tr><tr><th width=\"50\" height=\"0\">#{x / 10}</th>" if x % 10 == 0 %>
+	 	<td width="50" height="50">
+	 		<input type="radio" name="coord" value=<%= "#{cell}" %> <%= "class=\"hidden\"" if @board2.grid[cell.to_sym].content.class == Ship %>>	
 	 	</td>
 	 	<% x += 1 %>
 	 <% end %>

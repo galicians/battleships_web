@@ -221,3 +221,6 @@ get'/hello/:name' do
 end
 
 
+<img src="images/ship" alt="shippp" width="5"
+   height="5" /> : <img src="images/bird.gif" alt="Bird" width="5" height="5"
+
