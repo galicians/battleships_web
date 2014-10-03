@@ -210,3 +210,14 @@ http://webtypography.net/
 
 
 
+
+jnicklas/capybara/
+
+command + T --> find in sublime
+
+form action="hello/"
+
+get'/hello/:name' do
+end
+
+

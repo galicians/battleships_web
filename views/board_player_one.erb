@@ -1,4 +1,4 @@
-<p>This is your board</p>
+<h1>This is your board <%= session["player1"] %></h1>
 
 <table>
 
@@ -17,9 +17,9 @@
 	
 </table>
 
-<p>Please place your boats</p>
+<h1><%= session["player1"] %>, please place your boats</h1>
 
-<p>First the carrier, just select one cell from the board below:</p>
+<p>Just select cell, orientation and choose the type of ship from the available options:</p>
 
 <table>
 
@@ -39,16 +39,42 @@
 	 	</td>
 	 	<% x += 1 %>
 	 <% end %>
-	 <input type="submit" name = "carrier" value="Place carrier">
-	 <input type="submit" name = "battleship" value="Place battleship">
-	 <input type="submit" name = "destroyer" value="Place destroyer">
-	 <input type="submit" name = "submarine" value="Place submarine">
-	 <input type="submit" name = "patrol_boat" value="Place patrol boat">
-	 </form>	
+	 <style>
+	 input.hidden{
+	 	<%= "visibility: hidden;"%>
+	 }
+	 </style>
+	 <input type="submit" name = "type_ship" value="carrier" <%= "class=\"hidden\"" if session.key?"carrier" %>>
+	 <input type="submit" name = "type_ship" value="battleship" <%= "class=\"hidden\"" if session.key?"battleship" %>>
+	 <input type="submit" name = "type_ship" value="destroyer" <%= "class=\"hidden\"" if session.key?"destroyer" %>>
+	 <input type="submit" name = "type_ship" value="submarine" <%= "class=\"hidden\"" if session.key?"submarine" %>>
+	 <input type="submit" name = "type_ship" value="patrol_boat" <%= "class=\"hidden\"" if session.key?"patrol_boat" %>>
+	 <br>
+	 <br>
+	 <fieldset style="width:400px;">
+	 <legend ><b>Orientation</b></legend>
+	 <label>Horizontal</label><input type="radio" name="orientation" value="horizontally" checked="checked" />
+	 <label>Vertical</label><input type="radio" name="orientation" value="vertically">
+	 </fieldset>
+	 </form>
+	 <br>
+	 <br>
 
 	
 	
 </table>
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

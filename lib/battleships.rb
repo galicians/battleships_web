@@ -53,11 +53,16 @@ class Battleships < Sinatra::Base
   end
 
   post '/place_ships_player_one' do
-    board1.place(Ship.aircraft_carrier, params[:coord].to_sym) if params[:carrier] == "Place carrier"
-    board1.place(Ship.battleship, params[:coord].to_sym) if params[:battleship] == "Place battleship"
-    board1.place(Ship.destroyer, params[:coord].to_sym) if params[:destroyer] == "Place destroyer"
-    board1.place(Ship.submarine, params[:coord].to_sym) if params[:submarine] == "Place submarine"
-    board1.place(Ship.patrol_boat, params[:coord].to_sym) if params[:patrol_boat] == "Place patrol boat"
+    
+    ship = {"carrier" => Ship.aircraft_carrier,
+            "battleship" => Ship.battleship,
+            "destroyer" => Ship.destroyer,
+            "submarine" => Ship.submarine,
+            "patrol_boat" => Ship.patrol_boat}
+
+    session[params["type_ship"]] = 'placed'
+    board1.place(ship[params["type_ship"]],params[:coord].to_sym,params[:orientation].to_sym)
+
     @board1 = board1
     @board2 = board2
     @game = GAME
@@ -66,22 +71,40 @@ class Battleships < Sinatra::Base
   end
 
   post '/place_ships_player_two' do
-    board2.place(Ship.aircraft_carrier, params[:coord].to_sym) if params[:carrier] == "Place carrier"
-    board2.place(Ship.battleship, params[:coord].to_sym) if params[:battleship] == "Place battleship"
-    board2.place(Ship.destroyer, params[:coord].to_sym) if params[:destroyer] == "Place destroyer"
-    board2.place(Ship.submarine, params[:coord].to_sym) if params[:submarine] == "Place submarine"
-    board2.place(Ship.patrol_boat, params[:coord].to_sym) if params[:patrol_boat] == "Place patrol boat"
-    @board2 = board2
+    
+    ship = {"carrier" => Ship.aircraft_carrier,
+            "battleship" => Ship.battleship,
+            "destroyer" => Ship.destroyer,
+            "submarine" => Ship.submarine,
+            "patrol_boat" => Ship.patrol_boat}
+          
+    session["#{params["type_ship"]+2.to_s}"] = 'placed'
+    board2.place(ship[params["type_ship"]],params[:coord].to_sym,params[:orientation].to_sym)
+
     @board1 = board1
+    @board2 = board2
     @game = GAME
-    return redirect '/place_shoot_player_two' if GAME.ready?
+    return redirect '/place_shoot_player_two'if board2.ships_count == 5
     erb :board_player_two
   end
 
+
+
+     get '/place_shoot_player_one' do
+      @board1 = board1
+      @board2 = board2 
+      erb :player_one_sea
+    end
+
+    get '/place_shoot_player_two' do
+      @board1 = board1
+      @board2 = board2 
+      erb :player_two_sea
+    end
+
+
   post '/place_shoot_player_one' do
-    x = params[:coord]
-    puts x.to_s
-    # puts "{params[:shoot]}"
+    
     GAME.shoots(params[:coord].to_sym)
     @board2 = board2
     @board1 = board1
@@ -90,9 +113,7 @@ class Battleships < Sinatra::Base
   end
 
   post '/place_shoot_player_two' do
-    x = params[:coord]
-    puts x.to_s
-    # puts "{params[:shoot]}"
+    
     GAME.shoots(params[:coord].to_sym)
     @board2 = board2
     @board1 = board1
@@ -109,17 +130,6 @@ class Battleships < Sinatra::Base
 
   end
 
-   get '/place_shoot_player_one' do
-    @board1 = board1
-    @board2 = board2 
-    erb :player_one_sea
-  end
-
-  get '/place_shoot_player_two' do
-    @board1 = board1
-    @board2 = board2 
-    erb :player_two_sea
-  end
 
   get '/board_player_one' do
     @board1 = board1
@@ -130,6 +140,16 @@ class Battleships < Sinatra::Base
     @board2 = board2
   	erb :board_player_two
   end
+
+
+   get '/test' do
+      erb :test
+    end
+
+    post '/test' do
+      puts "in test #{params}"
+      erb :test
+    end
 
 
   # start the server if ruby file executed directly
